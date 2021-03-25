@@ -6,7 +6,7 @@ const GameBoard = () => {
 	const [ bankOfWords, setBankOfWords ] = useState([]);
 
 	useEffect(() => {
-		setBankOfWords([ 'cat', 'dog', 'fish', 'horse', 'budgie' ]);
+		setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie' ]);
 	}, []);
 	useEffect(
 		() => {
@@ -14,6 +14,18 @@ const GameBoard = () => {
 		},
 		[ bankOfWords ]
 	);
+
+	const displayDashesForWordToGuess = () => {
+		let dashesForWordToGuess = '';
+		for (let i = 0; i < wordToGuess.length; i++) {
+			if (wordToGuess.charAt(i) !== ' ') {
+				dashesForWordToGuess += '_ ';
+			} else {
+				dashesForWordToGuess += '/ ';
+			}
+		}
+		return dashesForWordToGuess;
+	};
 
 	const getWordToGuess = () => {
 		const randomIndex = Math.floor(Math.random() * bankOfWords.length);
@@ -23,6 +35,7 @@ const GameBoard = () => {
 	return (
 		<div>
 			<p>game board</p>
+			{wordToGuess && displayDashesForWordToGuess()}
 		</div>
 	);
 };

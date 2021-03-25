@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
+import Keyboard from './Keyboard.js';
 
 const GameBoard = () => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
@@ -35,7 +36,9 @@ const GameBoard = () => {
 	return (
 		<div>
 			<p>game board</p>
+
 			{wordToGuess && displayDashesForWordToGuess()}
+			<Keyboard />
 		</div>
 	);
 };

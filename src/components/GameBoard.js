@@ -5,6 +5,7 @@ import Keyboard from './Keyboard.js';
 const GameBoard = () => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ bankOfWords, setBankOfWords ] = useState([]);
+	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 
 	useEffect(() => {
 		setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie' ]);
@@ -36,9 +37,9 @@ const GameBoard = () => {
 	return (
 		<div>
 			<p>game board</p>
-
+			<p>{guessedCharacters.join(', ')}</p>
 			{wordToGuess && displayDashesForWordToGuess()}
-			<Keyboard />
+			<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
 		</div>
 	);
 };

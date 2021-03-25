@@ -1,7 +1,7 @@
 import React from 'react';
 import './Keyboard.css';
 import CharacterButton from './CharacterButton.js';
-const Keyboard = () => {
+const Keyboard = ({ guessedCharacters, setGuessedCharacters }) => {
 	const lettersForKeyboard = [
 		'1',
 		'2',
@@ -43,7 +43,13 @@ const Keyboard = () => {
 
 	const characterForButton = () => {
 		return lettersForKeyboard.map((letter) => {
-			return <CharacterButton buttonCharacter={letter} />;
+			return (
+				<CharacterButton
+					buttonCharacter={letter}
+					guessedCharacters={guessedCharacters}
+					setGuessedCharacters={setGuessedCharacters}
+				/>
+			);
 		});
 	};
 

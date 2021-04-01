@@ -7,9 +7,10 @@ const GameBoard = () => {
 	const [ bankOfWords, setBankOfWords ] = useState([]);
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 	const [ answer, setAnswer ] = useState('');
+	const [ numberOfLivesLeft, setNumberOfLivesLeft ] = useState(7);
 
 	useEffect(() => {
-		setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie', 'doorstopper' ]);
+		setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie', 'doorstopper', 'Bull Dog' ]);
 	}, []);
 
 	useEffect(
@@ -66,6 +67,12 @@ const GameBoard = () => {
 					// 	dashesForWordToGuess += '/ ';
 				}
 			}
+			if (
+				!wordToGuess.toLowerCase().includes(guessedCharacters[guessedCharacters.length - 1].toLowerCase()) &&
+				numberOfLivesLeft > 0
+			) {
+				setNumberOfLivesLeft(numberOfLivesLeft - 1);
+			}
 			setAnswer((answer) => displayedAnswer);
 		}
 	};
@@ -77,13 +84,51 @@ const GameBoard = () => {
 		// return bankOfWords[randomIndex];
 	};
 
+	const handleNewGame = () => {
+		// getWordToGuess();
+		// setGuessedCharacters([]);
+		// // setAnswer('');
+		// setNumberOfLivesLeft(7);
+		window.location.reload();
+	};
+
+	const displayWrongGuesses = () => {
+		let wrongGuesses = [];
+		guessedCharacters.forEach((guessedCharacter) => {
+			if (!wordToGuess.toLowerCase().includes(guessedCharacter.toLowerCase())) {
+				wrongGuesses.push(guessedCharacter);
+			}
+		});
+		return wrongGuesses.join(', ');
+	};
+
 	return (
 		<div>
 			<p>game board</p>
-			<p>{guessedCharacters.join(', ')}</p>
+			<p>Lives Left:{numberOfLivesLeft}</p>
+			{displayWrongGuesses()}
+			{/* <p>{guessedCharacters.join(', ')}</p> */}
 			{/* {wordToGuess && displayDashesForWordToGuess()} */}
 			<p>{answer}</p>
-			<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
+			{!answer.includes('_') && (
+				<div>
+					<p>Congratulations! You have won this game!</p>
+					<button onClick={() => handleNewGame()}>New Game</button>
+				</div>
+			)}
+			{numberOfLivesLeft === 0 && (
+				<div>
+					<p>Congratulations! You have lost this game! My kid sister would whup you at scrabble!!!</p>
+					<p>The answer that somehow managed to evade your inferior intellect was {wordToGuess}!!!</p>
+					<button onClick={() => handleNewGame()}>New Game</button>
+				</div>
+			)}
+			{console.log('wordToGuess', wordToGuess)}
+			{console.log('answer', answer)}
+			{answer.includes('_') &&
+			numberOfLivesLeft > 0 && (
+				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
+			)}
 		</div>
 	);
 };

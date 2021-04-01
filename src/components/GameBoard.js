@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
 
-const GameBoard = () => {
+const GameBoard = ({ bankOfWords }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
-	const [ bankOfWords, setBankOfWords ] = useState([]);
+	// const [ bankOfWords, setBankOfWords ] = useState([]);
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 	const [ answer, setAnswer ] = useState('');
 	const [ numberOfLivesLeft, setNumberOfLivesLeft ] = useState(7);
 
-	useEffect(() => {
-		setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie', 'doorstopper', 'Bull Dog' ]);
-	}, []);
+	// useEffect(() => {
+	// 	setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie', 'doorstopper', 'Bull Dog' ]);
+	// }, []);
 
 	useEffect(
 		() => {

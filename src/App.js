@@ -8,9 +8,9 @@ function App() {
 
 	return (
 		<div className="App">
-			<Homepage setBankOfWords={setBankOfWords} />
-			<GameBoard bankOfWords={bankOfWords} />
 			<h1>Word Game</h1>
+			{bankOfWords.length === 0 && <Homepage setBankOfWords={setBankOfWords} />}
+			{bankOfWords.length > 0 && <GameBoard setBankOfWords={setBankOfWords} bankOfWords={bankOfWords} />}
 		</div>
 	);
 }

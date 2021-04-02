@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
 
-const GameBoard = ({ bankOfWords }) => {
+const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	// const [ bankOfWords, setBankOfWords ] = useState([]);
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
@@ -123,6 +123,7 @@ const GameBoard = ({ bankOfWords }) => {
 				<div>
 					<p>Congratulations! You have won this game!</p>
 					<button onClick={() => handleNewGame()}>New Game</button>
+					<button onClick={() => setBankOfWords([])}>Select another Category</button>
 				</div>
 			)}
 			{numberOfLivesLeft === 0 && (
@@ -130,6 +131,7 @@ const GameBoard = ({ bankOfWords }) => {
 					<p>Congratulations! You have lost this game! My kid sister would whup you at scrabble!!!</p>
 					<p>The answer that somehow managed to evade your inferior intellect was {wordToGuess}!!!</p>
 					<button onClick={() => handleNewGame()}>New Game</button>
+					<button onClick={() => setBankOfWords([])}>Select another Category</button>
 				</div>
 			)}
 			{console.log('wordToGuess', wordToGuess)}

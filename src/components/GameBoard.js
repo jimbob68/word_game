@@ -106,6 +106,8 @@ const GameBoard = ({ bankOfWords }) => {
 		<div>
 			<p>game board</p>
 			<p>Lives Left:{numberOfLivesLeft}</p>
+			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft}></img> 
+			<br></br>
 			{displayWrongGuesses()}
 			{/* <p>{guessedCharacters.join(', ')}</p> */}
 			{/* {wordToGuess && displayDashesForWordToGuess()} */}

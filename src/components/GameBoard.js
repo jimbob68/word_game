@@ -37,10 +37,12 @@ const GameBoard = ({ bankOfWords }) => {
 		let dashesForWordToGuess = '';
 		if (wordToGuess) {
 			for (let i = 0; i < wordToGuess.length; i++) {
-				if (wordToGuess.charAt(i) !== ' ') {
-					dashesForWordToGuess += '_ ';
-				} else {
+				if (wordToGuess.charAt(i) === ' ') {
 					dashesForWordToGuess += '/ ';
+				} else if (!/[a-zA-Z0-9]/.test(wordToGuess.charAt(i))) {
+					dashesForWordToGuess += wordToGuess.charAt(i) + ' ';
+				} else {
+					dashesForWordToGuess += '_ ';
 				}
 			}
 			setAnswer(dashesForWordToGuess);
@@ -50,6 +52,8 @@ const GameBoard = ({ bankOfWords }) => {
 
 	const checkIfCharacterIsCorrect = () => {
 		let displayedAnswer = answer;
+		console.log('ANSWER', answer);
+		console.log('GUESSED CHARTACTERS', guessedCharacters);
 		if (guessedCharacters.length > 0) {
 			for (let i = 0; i < wordToGuess.length; i++) {
 				if (
@@ -57,8 +61,10 @@ const GameBoard = ({ bankOfWords }) => {
 					guessedCharacters[guessedCharacters.length - 1].toLowerCase()
 				) {
 					let splitAnswer = displayedAnswer.split(' ');
+					console.log('splitAnswer', splitAnswer);
 					splitAnswer[i] = guessedCharacters[guessedCharacters.length - 1];
 					let joinedAnswer = splitAnswer.join(' ');
+					console.log('joinedAnswer', joinedAnswer);
 					displayedAnswer = joinedAnswer;
 					// setAnswer(displayedAnswer);
 					// } else if (wordToGuess.charAt(i) !== ' ') {
@@ -80,16 +86,17 @@ const GameBoard = ({ bankOfWords }) => {
 	const getWordToGuess = () => {
 		const randomIndex = Math.floor(Math.random() * bankOfWords.length);
 		setWordToGuess(bankOfWords[randomIndex]);
+		// setWordToGuess("don't you want me baby 9 9 9 9 % ^ * (! @ ");
 		console.log('bankOfWords:', bankOfWords[randomIndex]);
 		// return bankOfWords[randomIndex];
 	};
 
 	const handleNewGame = () => {
-		// getWordToGuess();
-		// setGuessedCharacters([]);
-		// // setAnswer('');
-		// setNumberOfLivesLeft(7);
-		window.location.reload();
+		getWordToGuess();
+		setGuessedCharacters([]);
+		// setAnswer('');
+		setNumberOfLivesLeft(7);
+		// window.location.reload();
 	};
 
 	const displayWrongGuesses = () => {
@@ -106,8 +113,8 @@ const GameBoard = ({ bankOfWords }) => {
 		<div>
 			<p>game board</p>
 			<p>Lives Left:{numberOfLivesLeft}</p>
-			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft}></img> 
-			<br></br>
+			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft} />
+			<br />
 			{displayWrongGuesses()}
 			{/* <p>{guessedCharacters.join(', ')}</p> */}
 			{/* {wordToGuess && displayDashesForWordToGuess()} */}

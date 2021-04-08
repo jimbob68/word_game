@@ -10,14 +10,19 @@ function App() {
 	const [ allHints, setAllHints ] = useState([]);
 
 	const getCountryInfo = (type) => {
+		const countryHints = [];
 		fetch('https://restcountries.eu/rest/v2/all')
 			.then((res) => res.json())
 			.then((results) => {
 				const countryNamesArray = [];
 				results.forEach((result) => {
 					countryNamesArray.push(result[type]);
+					if (type === 'capital') {
+						countryHints.push(result.name);
+					} else {
+						countryHints.push(result.region);
+					}
 				});
-				console.log(results);
 				setBankOfWords(countryNamesArray);
 				return results;
 			})
@@ -27,6 +32,7 @@ function App() {
 		} else {
 			setCategoryChosen('Capital Names');
 		}
+		setAllHints(countryHints);
 	};
 
 	const getTvShowNames = () => {

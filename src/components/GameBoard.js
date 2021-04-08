@@ -78,6 +78,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 		setWordToGuess(bankOfWords[randomIndex]);
 		setHint(allHints[randomIndex]);
 		console.log('bankOfWords:', bankOfWords[randomIndex]);
+		console.log('hint:', allHints[randomIndex]);
+		console.log('All Hints:', allHints);
 	};
 
 	const handleNewGame = () => {
@@ -100,7 +102,13 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	};
 
 	const displayHint = () => {
-		return <p>{hint.join(', ')}</p>;
+		if (categoryChosen === 'TV Shows') {
+			return <p>Genres: {hint.join(', ')}</p>;
+		} else if (categoryChosen === 'Country Names') {
+			return <p>Region: {hint}</p>;
+		} else if (categoryChosen === 'Capital Names') {
+			return <p>Capital of: {hint}</p>;
+		}
 	};
 
 	return (

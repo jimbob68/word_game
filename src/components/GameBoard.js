@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
 
-const GameBoard = ({ bankOfWords, setBankOfWords }) => {
+const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames, allHints }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
-	// const [ bankOfWords, setBankOfWords ] = useState([]);
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 	const [ answer, setAnswer ] = useState('');
 	const [ numberOfLivesLeft, setNumberOfLivesLeft ] = useState(7);
-
-	// useEffect(() => {
-	// 	setBankOfWords([ 'cat', 'dog', 'fish', 'horse budgie', 'doorstopper', 'Bull Dog' ]);
-	// }, []);
+	const [ hint, setHint ] = useState([]);
 
 	useEffect(
 		() => {
@@ -47,7 +43,6 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 			}
 			setAnswer(dashesForWordToGuess);
 		}
-		// return dashesForWordToGuess;
 	};
 
 	const checkIfCharacterIsCorrect = () => {
@@ -66,11 +61,6 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 					let joinedAnswer = splitAnswer.join(' ');
 					console.log('joinedAnswer', joinedAnswer);
 					displayedAnswer = joinedAnswer;
-					// setAnswer(displayedAnswer);
-					// } else if (wordToGuess.charAt(i) !== ' ') {
-					// 	dashesForWordToGuess += '_ ';
-					// } else {
-					// 	dashesForWordToGuess += '/ ';
 				}
 			}
 			if (
@@ -86,17 +76,17 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 	const getWordToGuess = () => {
 		const randomIndex = Math.floor(Math.random() * bankOfWords.length);
 		setWordToGuess(bankOfWords[randomIndex]);
-		// setWordToGuess("don't you want me baby 9 9 9 9 % ^ * (! @ ");
+		setHint(allHints[randomIndex]);
 		console.log('bankOfWords:', bankOfWords[randomIndex]);
-		// return bankOfWords[randomIndex];
 	};
 
 	const handleNewGame = () => {
 		getWordToGuess();
 		setGuessedCharacters([]);
-		// setAnswer('');
 		setNumberOfLivesLeft(7);
-		// window.location.reload();
+		if (categoryChosen === 'TV Shows') {
+			getTvShowNames();
+		}
 	};
 
 	const displayWrongGuesses = () => {
@@ -109,15 +99,17 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 		return wrongGuesses.join(', ');
 	};
 
+	const displayHint = () => {
+		return <p>{hint.join(', ')}</p>;
+	};
+
 	return (
 		<div>
-			{/* <p>game board</p> */}
 			<p>Lives Left: {numberOfLivesLeft}</p>
 			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft} />
 			<br />
 			{displayWrongGuesses()}
-			{/* <p>{guessedCharacters.join(', ')}</p> */}
-			{/* {wordToGuess && displayDashesForWordToGuess()} */}
+			{hint && displayHint()}
 			<p>{answer}</p>
 			{!answer.includes('_') && (
 				<div>
@@ -134,8 +126,6 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 					<button onClick={() => setBankOfWords([])}>Select another Category</button>
 				</div>
 			)}
-			{/* {console.log('wordToGuess', wordToGuess)}
-			{console.log('answer', answer)} */}
 			{answer.includes('_') &&
 			numberOfLivesLeft > 0 && (
 				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />

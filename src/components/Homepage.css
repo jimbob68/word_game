@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300&family=New+Tegomin&display=swap');
+
+/* font-family: 'Londrina Solid', cursive;
+font-family: 'New Tegomin', serif; */
+
+.home-intro-text {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 20px;
+}
+
+.home-button {
+    display: block;
+    margin: 10px auto;
+    padding: 5px 10px;
+    min-width: 200px;
+    cursor: pointer;
+
+    background-color: transparent;
+    border: solid 1px black;
+    border-radius: 5px;
+
+    font-family: 'New Tegomin', serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.home-button:hover {
+    background-color: #bdbdbd;
+}

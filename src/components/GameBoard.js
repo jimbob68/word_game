@@ -111,8 +111,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 
 	return (
 		<div>
-			<p>game board</p>
-			<p>Lives Left:{numberOfLivesLeft}</p>
+			{/* <p>game board</p> */}
+			<p>Lives Left: {numberOfLivesLeft}</p>
 			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft} />
 			<br />
 			{displayWrongGuesses()}
@@ -134,8 +134,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords }) => {
 					<button onClick={() => setBankOfWords([])}>Select another Category</button>
 				</div>
 			)}
-			{console.log('wordToGuess', wordToGuess)}
-			{console.log('answer', answer)}
+			{/* {console.log('wordToGuess', wordToGuess)}
+			{console.log('answer', answer)} */}
 			{answer.includes('_') &&
 			numberOfLivesLeft > 0 && (
 				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />

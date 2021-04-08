@@ -34,11 +34,13 @@ const Homepage = ({ setBankOfWords }) => {
 	};
 
 	return (
-		<div>
-			<p>Categories</p>
-			<button onClick={() => getCountryNames('name')}>Countries</button>
-			<button onClick={() => getCountryNames('capital')}>Capitals</button>
-			<button onClick={() => getTvShowNames()}>T.V.Shows</button>
+		<div className="home-container">
+			<p className="home-intro-text">Choose a Category</p>
+			<div className="home-button-container">
+			<button className="home-button" onClick={() => getCountryNames('name')}>Countries</button>
+			<button className="home-button" onClick={() => getCountryNames('capital')}>Capital Cities</button>
+			<button className="home-button" onClick={() => getTvShowNames()}>T.V.Shows</button>
+			</div>
 		</div>
 	);
 };

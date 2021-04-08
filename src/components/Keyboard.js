@@ -54,7 +54,7 @@ const Keyboard = ({ guessedCharacters, setGuessedCharacters }) => {
 	};
 
 	return (
-		<div>
+		<div className="keyboard">
 			<p>Keyboard</p>
 			{characterForButton()}
 		</div>

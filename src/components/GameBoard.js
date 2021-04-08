@@ -8,6 +8,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	const [ answer, setAnswer ] = useState('');
 	const [ numberOfLivesLeft, setNumberOfLivesLeft ] = useState(7);
 	const [ hint, setHint ] = useState([]);
+	const [ showHint, setShowHint ] = useState(false);
 
 	useEffect(
 		() => {
@@ -86,6 +87,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 		getWordToGuess();
 		setGuessedCharacters([]);
 		setNumberOfLivesLeft(7);
+		setShowHint(false);
 		if (categoryChosen === 'TV Shows') {
 			getTvShowNames();
 		}
@@ -102,6 +104,9 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	};
 
 	const displayHint = () => {
+		if (showHint === false) {
+			return <button onClick={() => setShowHint(true)}>Hint</button>;
+		}
 		if (categoryChosen === 'TV Shows') {
 			return <p>Genres: {hint.join(', ')}</p>;
 		} else if (categoryChosen === 'Country Names') {
@@ -118,6 +123,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			<br />
 			{displayWrongGuesses()}
 			{hint && displayHint()}
+			{/* {hint && <button onClick={() => displayHint()}>Hint</button>} */}
 			<p>{answer}</p>
 			{!answer.includes('_') && (
 				<div>

@@ -1,0 +1,11 @@
+@media screen and (max-height: 655px) {
+	.hangman-image {
+		height: 180px;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.hangman-image {
+		height: 150px;
+	}
+}

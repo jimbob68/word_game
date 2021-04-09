@@ -17,11 +17,15 @@ const CharacterButton = ({ buttonCharacter, guessedCharacters, setGuessedCharact
 	};
 
 	return (
-		
-			<button className="character-key" onClick={() => handleCharacterButtonClick()} disabled={characterAlreadySelected}>
+		<div className="character-div" id={buttonCharacter}>
+			<button
+				className="character-key"
+				onClick={() => handleCharacterButtonClick()}
+				disabled={characterAlreadySelected}
+			>
 				{buttonCharacter}
 			</button>
-		
+		</div>
 	);
 };
 export default CharacterButton;

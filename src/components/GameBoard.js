@@ -121,7 +121,11 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	return (
 		<div>
 			<p>Lives Left: {numberOfLivesLeft}</p>
-			<img src={require('../images/' + numberOfLivesLeft + '.png').default} alt={numberOfLivesLeft} />
+			<img
+				className="hangman-image"
+				src={require('../images/' + numberOfLivesLeft + '.png').default}
+				alt={numberOfLivesLeft}
+			/>
 			<br />
 			{displayWrongGuesses()}
 			{hint && displayHint()}

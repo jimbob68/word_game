@@ -1,5 +1,44 @@
 .character-key {
-    display: inline-block;
-    margin: 3px;
-    padding: 7px;
+	display: inline-block;
+	margin: 3px;
+	padding: 7px;
+	width: 30px;
+	background-color: blanchedalmond;
+	border: 1px solid blueviolet;
+}
+
+.character-key:hover {
+	background-color: cornsilk;
+}
+
+#P,
+#L,
+#Q {
+	display: inline;
+}
+
+#P::after,
+#L::after,
+#Q::before {
+	content: "";
+	display: block;
+}
+
+.character-div {
+	display: inline-block;
+}
+
+@media screen and (max-width: 320px) {
+	.character-key {
+		width: 25px;
+	}
+}
+
+@media screen and (max-width: 280px) {
+	.character-key {
+		width: 22px;
+		margin: 2px;
+		padding: 0px;
+		height: 35px;
+	}
 }

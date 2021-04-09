@@ -35,15 +35,63 @@ function App() {
 		setAllHints(countryHints);
 	};
 
-	const getTvShowNames = () => {
+	// const getTvShowNames = () => {
+	// 	let genres = [];
+	// 	fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=' + tmdbApiKey + '&language=en-US') // fetching all possible genres and ids
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			genres = data.genres; // setting all genres array
+	// 		});
+	// 	const pageNumber = Math.floor(Math.random() * 500) + 1;
+	// 	fetch('https://api.themoviedb.org/3/tv/popular?api_key=' + tmdbApiKey + '&language=en-US&page=' + pageNumber)
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			const tvShowNamesArray = [];
+	// 			const genresForAllResults = []; // genres for each result, will be array of arrays
+	// 			data.results.forEach((result) => {
+	// 				if (
+	// 					result.original_language === 'en' &&
+	// 					(result.origin_country[0] === 'US' || result.origin_country[0] === 'GB') //filtering results for US and UK shows
+	// 				) {
+	// 					tvShowNamesArray.push(result.name);
+	// 					result.genre_names = []; // adding genre_names property to each TV show
+	// 					result.genre_ids.forEach((genre_id) => {
+	// 						// looping over all genre_ids for each TV show
+	// 						genres.forEach((genre) => {
+	// 							// looping over all possible genres
+	// 							if (genre.id === genre_id) {
+	// 								// checking if this show's genre_id matches, if yes push genre_name
+	// 								result.genre_names.push(genre.name);
+	// 							}
+	// 						});
+	// 					});
+	// 					genresForAllResults.push(result.genre_names);
+	// 				}
+	// 			});
+	// 			setAllHints(genresForAllResults);
+	// 			setBankOfWords(tvShowNamesArray);
+	// 			return data;
+	// 		})
+	// 		.catch((err) => console.error(err));
+	// 	setCategoryChosen('TV Shows');
+	// };
+
+	const getTvShowNames = (type) => {
 		let genres = [];
-		fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=' + tmdbApiKey + '&language=en-US') // fetching all possible genres and ids
+		fetch('https://api.themoviedb.org/3/genre/' + type + '/list?api_key=' + tmdbApiKey + '&language=en-US') // fetching all possible genres and ids
 			.then((res) => res.json())
 			.then((data) => {
 				genres = data.genres; // setting all genres array
 			});
 		const pageNumber = Math.floor(Math.random() * 500) + 1;
-		fetch('https://api.themoviedb.org/3/tv/popular?api_key=' + tmdbApiKey + '&language=en-US&page=' + pageNumber)
+		fetch(
+			'https://api.themoviedb.org/3/' +
+				type +
+				'/popular?api_key=' +
+				tmdbApiKey +
+				'&language=en-US&page=' +
+				pageNumber
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				const tvShowNamesArray = [];
@@ -51,9 +99,15 @@ function App() {
 				data.results.forEach((result) => {
 					if (
 						result.original_language === 'en' &&
-						(result.origin_country[0] === 'US' || result.origin_country[0] === 'GB') //filtering results for US and UK shows
+						(type === 'movie' ||
+							((type === 'tv' && result.origin_country[0] === 'US') ||
+								(type === 'tv' && result.origin_country[0] === 'GB'))) //filtering results for US and UK shows
 					) {
-						tvShowNamesArray.push(result.name);
+						if (type === 'tv') {
+							tvShowNamesArray.push(result.name);
+						} else {
+							tvShowNamesArray.push(result.title);
+						}
 						result.genre_names = []; // adding genre_names property to each TV show
 						result.genre_ids.forEach((genre_id) => {
 							// looping over all genre_ids for each TV show
@@ -73,7 +127,11 @@ function App() {
 				return data;
 			})
 			.catch((err) => console.error(err));
-		setCategoryChosen('TV Shows');
+		if (type === 'tv') {
+			setCategoryChosen('TV Shows');
+		} else {
+			setCategoryChosen('Movies');
+		}
 	};
 
 	return (

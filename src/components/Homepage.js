@@ -12,8 +12,12 @@ const Homepage = ({ getCountryInfo, getTvShowNames }) => {
 				<button className="home-button" onClick={() => getCountryInfo('capital')}>
 					Capital Cities
 				</button>
-				<button className="home-button" onClick={() => getTvShowNames()}>
+				<button className="home-button" onClick={() => getTvShowNames('tv')}>
 					T.V.Shows
+				</button>
+
+				<button className="home-button" onClick={() => getTvShowNames('movie')}>
+					Movies
 				</button>
 			</div>
 		</div>

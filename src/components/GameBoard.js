@@ -89,7 +89,9 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 		setNumberOfLivesLeft(7);
 		setShowHint(false);
 		if (categoryChosen === 'TV Shows') {
-			getTvShowNames();
+			getTvShowNames('tv');
+		} else if (categoryChosen === 'Movies') {
+			getTvShowNames('movie');
 		}
 	};
 
@@ -107,7 +109,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 		if (showHint === false) {
 			return <button onClick={() => setShowHint(true)}>Hint</button>;
 		}
-		if (categoryChosen === 'TV Shows') {
+		if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
 			return <p>Genres: {hint.join(', ')}</p>;
 		} else if (categoryChosen === 'Country Names') {
 			return <p>Region: {hint}</p>;

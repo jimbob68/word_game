@@ -53,11 +53,6 @@ const Keyboard = ({ guessedCharacters, setGuessedCharacters }) => {
 		});
 	};
 
-	return (
-		<div className="keyboard">
-			<p>Keyboard</p>
-			{characterForButton()}
-		</div>
-	);
+	return <div className="keyboard">{characterForButton()}</div>;
 };
 export default Keyboard;

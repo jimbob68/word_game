@@ -1,3 +1,30 @@
+.wrong-guesses {
+	margin: 10px;
+}
+.wrong-answer-message {
+	margin: 20px 10px;
+}
+
+.hint-button {
+	width: auto;
+	padding: 5px 10px;
+}
+
+.hint-text {
+	margin: 20px 10px;
+}
+
+.answer-text {
+	margin: 20px 10px;
+	letter-spacing: 3px;
+	line-height: 20px;
+	overflow-wrap: break-word;
+}
+
+/* .x {
+	width: 85%;
+} */
+
 @media screen and (max-height: 655px) {
 	.hangman-image {
 		height: 180px;

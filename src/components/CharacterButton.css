@@ -3,12 +3,17 @@
 	margin: 3px;
 	padding: 7px;
 	width: 30px;
-	background-color: blanchedalmond;
-	border: 1px solid blueviolet;
+	background-color: transparent;
+	border: solid 1px black;
+	border-radius: 5px;
+	cursor: pointer;
+	/* background-color: blanchedalmond; */
+	/* border: 1px solid blueviolet; */
 }
 
 .character-key:hover {
-	background-color: cornsilk;
+	background-color: #bdbdbd;
+	/* background-color: cornsilk; */
 }
 
 #P,

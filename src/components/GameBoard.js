@@ -35,11 +35,11 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 		if (wordToGuess) {
 			for (let i = 0; i < wordToGuess.length; i++) {
 				if (wordToGuess.charAt(i) === ' ') {
-					dashesForWordToGuess += '/ ';
+					dashesForWordToGuess += ' / ';
 				} else if (!/[a-zA-Z0-9]/.test(wordToGuess.charAt(i))) {
-					dashesForWordToGuess += wordToGuess.charAt(i) + ' ';
+					dashesForWordToGuess += wordToGuess.charAt(i);
 				} else {
-					dashesForWordToGuess += '_ ';
+					dashesForWordToGuess += '_';
 				}
 			}
 			setAnswer(dashesForWordToGuess);
@@ -56,10 +56,12 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 					wordToGuess.charAt(i).toLowerCase() ===
 					guessedCharacters[guessedCharacters.length - 1].toLowerCase()
 				) {
-					let splitAnswer = displayedAnswer.split(' ');
+					let splitAnswer = displayedAnswer.split('');
+					const splitAnswerNoSpaces = splitAnswer.filter((character) => character !== ' ');
 					console.log('splitAnswer', splitAnswer);
-					splitAnswer[i] = guessedCharacters[guessedCharacters.length - 1];
-					let joinedAnswer = splitAnswer.join(' ');
+					splitAnswerNoSpaces[i] = guessedCharacters[guessedCharacters.length - 1];
+					let joinedAnswer = splitAnswerNoSpaces.join('');
+					joinedAnswer = joinedAnswer.replaceAll('/', ' / ');
 					console.log('joinedAnswer', joinedAnswer);
 					displayedAnswer = joinedAnswer;
 				}
@@ -107,7 +109,11 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 
 	const displayHint = () => {
 		if (showHint === false) {
-			return <button onClick={() => setShowHint(true)}>Hint</button>;
+			return (
+				<button className="hint-button" onClick={() => setShowHint(true)}>
+					Hint
+				</button>
+			);
 		}
 		if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
 			return <p>Genres: {hint.join(', ')}</p>;
@@ -127,10 +133,12 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 				alt={numberOfLivesLeft}
 			/>
 			<br />
-			{displayWrongGuesses()}
-			{hint && displayHint()}
+			<div className="wrong-guesses">{displayWrongGuesses()}</div>
+			<div className="hint-text">{hint && displayHint()}</div>
 			{/* {hint && <button onClick={() => displayHint()}>Hint</button>} */}
-			<p>{answer}</p>
+			<div className="x">
+				<p className="answer-text">{answer}</p>
+			</div>
 			{!answer.includes('_') && (
 				<div>
 					<p>Congratulations! You have won this game!</p>
@@ -140,8 +148,9 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			)}
 			{numberOfLivesLeft === 0 && (
 				<div>
-					<p>Congratulations! You have lost this game! My kid sister would whup you at scrabble!!!</p>
-					<p>The answer that somehow managed to evade your inferior intellect was {wordToGuess}!!!</p>
+					<p className="wrong-answer-message">
+						Sorry you were unsuccessful this time! The answer was <b>{wordToGuess}!</b>
+					</p>
 					<button onClick={() => handleNewGame()}>New Game</button>
 					<button onClick={() => setBankOfWords([])}>Select another Category</button>
 				</div>

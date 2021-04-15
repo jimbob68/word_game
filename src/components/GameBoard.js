@@ -110,7 +110,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	const displayHint = () => {
 		if (showHint === false) {
 			return (
-				<button className="hint-button" onClick={() => setShowHint(true)}>
+				<button className="game-button" onClick={() => setShowHint(true)}>
 					Hint
 				</button>
 			);
@@ -142,8 +142,12 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			{!answer.includes('_') && (
 				<div>
 					<p>Congratulations! You have won this game!</p>
-					<button onClick={() => handleNewGame()}>New Game</button>
-					<button onClick={() => setBankOfWords([])}>Select another Category</button>
+					<button className="game-button" onClick={() => handleNewGame()}>
+						New Game
+					</button>
+					<button className="game-button" onClick={() => setBankOfWords([])}>
+						Select another Category
+					</button>
 				</div>
 			)}
 			{numberOfLivesLeft === 0 && (
@@ -151,8 +155,12 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 					<p className="wrong-answer-message">
 						Sorry you were unsuccessful this time! The answer was <b>{wordToGuess}!</b>
 					</p>
-					<button onClick={() => handleNewGame()}>New Game</button>
-					<button onClick={() => setBankOfWords([])}>Select another Category</button>
+					<button className="game-button" onClick={() => handleNewGame()}>
+						New Game
+					</button>
+					<button className="game-button" onClick={() => setBankOfWords([])}>
+						Select another Category
+					</button>
 				</div>
 			)}
 			{answer.includes('_') &&

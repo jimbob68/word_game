@@ -5,9 +5,10 @@
 	margin: 20px 10px;
 }
 
-.hint-button {
+.game-button {
 	width: auto;
 	padding: 5px 10px;
+	margin: 0 5px;
 }
 
 .hint-text {
@@ -25,7 +26,7 @@
 	width: 85%;
 } */
 
-@media screen and (max-height: 655px) {
+@media screen and (max-height: 670px) {
 	.hangman-image {
 		height: 180px;
 	}

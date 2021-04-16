@@ -93,17 +93,50 @@ function App() {
 		}
 	};
 
+	const getMovieStars = () => {
+		const pageNumber = Math.floor(Math.random() * 500) + 1;
+
+		fetch(
+			'https://api.themoviedb.org/3/person/popular?api_key=' + tmdbApiKey + '&language=en-US&page=' + pageNumber
+		)
+			.then((res) => res.json())
+			.then((data) => {
+				const movieStarNames = [];
+				let movieStarHints = [];
+
+				data.results.forEach((result) => {
+					if (result['known_for'][0].title && result['known_for'][0]['original_language'] === 'en') {
+						movieStarNames.push(result.name);
+						movieStarHints.push(result['known_for'][0].title);
+					}
+				});
+				setBankOfWords(movieStarNames);
+				setAllHints(movieStarHints);
+			})
+			.catch((err) => console.error(err));
+
+		setCategoryChosen('Movie Stars');
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
-			{bankOfWords.length === 0 && <Homepage getTvShowNames={getTvShowNames} getCountryInfo={getCountryInfo} />}
-			{bankOfWords.length > 0 && (
+			{bankOfWords.length === 0 && (
+				<Homepage
+					getTvShowNames={getTvShowNames}
+					getCountryInfo={getCountryInfo}
+					getMovieStars={getMovieStars}
+				/>
+			)}
+			{bankOfWords.length > 0 &&
+			allHints.length > 0 && (
 				<GameBoard
 					setBankOfWords={setBankOfWords}
 					bankOfWords={bankOfWords}
 					categoryChosen={categoryChosen}
 					getTvShowNames={getTvShowNames}
 					allHints={allHints}
+					getMovieStars={getMovieStars}
 				/>
 			)}
 		</div>

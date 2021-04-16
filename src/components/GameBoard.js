@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
 
-const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames, allHints }) => {
+const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames, allHints, getMovieStars }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 	const [ answer, setAnswer ] = useState('');
@@ -94,6 +94,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			getTvShowNames('tv');
 		} else if (categoryChosen === 'Movies') {
 			getTvShowNames('movie');
+		} else if (categoryChosen === 'Movie Stars') {
+			getMovieStars();
 		}
 	};
 
@@ -121,6 +123,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			return <p>Region: {hint}</p>;
 		} else if (categoryChosen === 'Capital Names') {
 			return <p>Capital of: {hint}</p>;
+		} else if (categoryChosen === 'Movie Stars') {
+			return <p>Starred in: {hint}</p>;
 		}
 	};
 

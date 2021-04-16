@@ -118,6 +118,19 @@ function App() {
 		setCategoryChosen('Movie Stars');
 	};
 
+	const getPokemon = () => {
+		const pokemonNumber = Math.floor(Math.random() * 898) + 1;
+		fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonNumber)
+			.then((res) => res.json())
+			.then((result) => {
+				setBankOfWords([ result.name ]);
+				// setAllHints([ result.sprites['front_default'] ]);
+				setAllHints([ result.sprites.other['official-artwork']['front_default'] ]);
+			})
+			.catch((err) => console.error(err));
+		setCategoryChosen('Pokemon');
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
@@ -126,6 +139,7 @@ function App() {
 					getTvShowNames={getTvShowNames}
 					getCountryInfo={getCountryInfo}
 					getMovieStars={getMovieStars}
+					getPokemon={getPokemon}
 				/>
 			)}
 			{bankOfWords.length > 0 &&
@@ -137,6 +151,8 @@ function App() {
 					getTvShowNames={getTvShowNames}
 					allHints={allHints}
 					getMovieStars={getMovieStars}
+					getPokemon={getPokemon}
+					setAllHints={setAllHints}
 				/>
 			)}
 		</div>

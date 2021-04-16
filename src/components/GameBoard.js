@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
 
-const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames, allHints, getMovieStars }) => {
+const GameBoard = ({
+	bankOfWords,
+	setBankOfWords,
+	categoryChosen,
+	getTvShowNames,
+	allHints,
+	getMovieStars,
+	getPokemon,
+	setAllHints
+}) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
 	const [ answer, setAnswer ] = useState('');
@@ -86,6 +95,7 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 	};
 
 	const handleNewGame = () => {
+		setAllHints([]);
 		getWordToGuess();
 		setGuessedCharacters([]);
 		setNumberOfLivesLeft(7);
@@ -96,6 +106,8 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			getTvShowNames('movie');
 		} else if (categoryChosen === 'Movie Stars') {
 			getMovieStars();
+		} else if (categoryChosen === 'Pokemon') {
+			getPokemon();
 		}
 	};
 
@@ -125,12 +137,14 @@ const GameBoard = ({ bankOfWords, setBankOfWords, categoryChosen, getTvShowNames
 			return <p>Capital of: {hint}</p>;
 		} else if (categoryChosen === 'Movie Stars') {
 			return <p>Starred in: {hint}</p>;
+		} else if (categoryChosen === 'Pokemon') {
+			return <img className="pokemon-image" src={hint} alt="Pokemon" />;
 		}
 	};
 
 	return (
 		<div>
-			<p>Lives Left: {numberOfLivesLeft}</p>
+			<p className="lives-left-text">Lives Left: {numberOfLivesLeft}</p>
 			<img
 				className="hangman-image"
 				src={require('../images/' + numberOfLivesLeft + '.png').default}

@@ -11,7 +11,8 @@ const GameBoard = ({
 	getMovieStars,
 	getPokemon,
 	setAllHints,
-	countriesResults
+	countriesResults,
+	getFootballTeams
 }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
@@ -127,6 +128,9 @@ const GameBoard = ({
 		} else if (categoryChosen === 'Pokemon') {
 			getPokemon();
 			setAllHints([]);
+		} else if (categoryChosen === 'Football Teams') {
+			getFootballTeams();
+			setAllHints([]);
 		}
 	};
 
@@ -162,6 +166,8 @@ const GameBoard = ({
 			return <p>Starred in: {hint}</p>;
 		} else if (categoryChosen === 'Pokemon') {
 			return <img className="pokemon-image" src={hint} alt="Pokemon" />;
+		} else if (categoryChosen === 'Football Teams') {
+			return <p>Plays in: {hint}</p>;
 		}
 	};
 

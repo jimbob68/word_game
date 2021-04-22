@@ -138,6 +138,29 @@ function App() {
 		setCategoryChosen('Pokemon');
 	};
 
+	const getFootballTeams = () => {
+		let footballTeamNames = [];
+		let footballHint = [];
+		let footballLeagueCodes = [ 'en.1', 'en.2', 'de.1', 'es.1', 'fr.1', 'it.1', 'nl.1', 'pt.1' ];
+		const randomIndex = Math.floor(Math.random() * footballLeagueCodes.length);
+		fetch(
+			'https://raw.githubusercontent.com/openfootball/football.json/master/2020-21/' +
+				footballLeagueCodes[randomIndex] +
+				'.clubs.json'
+		)
+			.then((res) => res.json())
+			.then((results) => {
+				results.clubs.forEach((result) => {
+					footballTeamNames.push(result.name);
+					footballHint.push(result.country);
+				});
+				setBankOfWords(footballTeamNames);
+				setAllHints(footballHint);
+				setCategoryChosen('Football Teams');
+			})
+			.catch((err) => console.error(err));
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
@@ -147,6 +170,7 @@ function App() {
 					getCountryInfo={getCountryInfo}
 					getMovieStars={getMovieStars}
 					getPokemon={getPokemon}
+					getFootballTeams={getFootballTeams}
 				/>
 			)}
 			{/* {bankOfWords.length > 0 &&
@@ -176,6 +200,7 @@ function App() {
 					getPokemon={getPokemon}
 					setAllHints={setAllHints}
 					countriesResults={countriesResults}
+					getFootballTeams={getFootballTeams}
 				/>
 			)}
 		</div>

@@ -8,6 +8,7 @@ function App() {
 	const [ bankOfWords, setBankOfWords ] = useState([]);
 	const [ categoryChosen, setCategoryChosen ] = useState('');
 	const [ allHints, setAllHints ] = useState([]);
+	const [ countriesResults, setCountriesResults ] = useState([]);
 
 	const getCountryInfo = (type) => {
 		const countryHints = [];
@@ -20,19 +21,25 @@ function App() {
 					if (type === 'capital') {
 						countryHints.push(result.name);
 					} else {
-						countryHints.push(result.region);
+						// if (result.borders[0]) {
+						countryHints.push(result.borders[0]);
+						// } else {
+						// 	countryHints.push('Island');
+						// }
 					}
 				});
 				setBankOfWords(countryNamesArray);
+				setCountriesResults(results);
 				return results;
 			})
+			.then(() => setAllHints(countryHints))
 			.catch((err) => console.error(err));
 		if (type === 'name') {
 			setCategoryChosen('Country Names');
 		} else {
 			setCategoryChosen('Capital Names');
 		}
-		setAllHints(countryHints);
+		// setAllHints(countryHints);
 	};
 
 	const getTvShowNames = (type) => {
@@ -142,6 +149,21 @@ function App() {
 					getPokemon={getPokemon}
 				/>
 			)}
+			{/* {bankOfWords.length > 0 &&
+			allHints.length > 0 && (
+				<GameBoard
+					setBankOfWords={setBankOfWords}
+					bankOfWords={bankOfWords}
+					categoryChosen={categoryChosen}
+					getTvShowNames={getTvShowNames}
+					allHints={allHints}
+					getMovieStars={getMovieStars}
+					getPokemon={getPokemon}
+					setAllHints={setAllHints}
+					countriesResults={countriesResults}
+				/>
+			)} */}
+
 			{bankOfWords.length > 0 &&
 			allHints.length > 0 && (
 				<GameBoard
@@ -153,6 +175,7 @@ function App() {
 					getMovieStars={getMovieStars}
 					getPokemon={getPokemon}
 					setAllHints={setAllHints}
+					countriesResults={countriesResults}
 				/>
 			)}
 		</div>

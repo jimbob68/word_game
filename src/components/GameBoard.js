@@ -10,7 +10,8 @@ const GameBoard = ({
 	allHints,
 	getMovieStars,
 	getPokemon,
-	setAllHints
+	setAllHints,
+	countriesResults
 }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
@@ -88,26 +89,44 @@ const GameBoard = ({
 	const getWordToGuess = () => {
 		const randomIndex = Math.floor(Math.random() * bankOfWords.length);
 		setWordToGuess(bankOfWords[randomIndex]);
-		setHint(allHints[randomIndex]);
+		if (categoryChosen === 'Country Names') {
+			let countryHint = 'Island';
+			countriesResults.forEach((result) => {
+				console.log('result.Alpha3:', result.alpha3Code);
+				if (result.alpha3Code === allHints[randomIndex]) {
+					countryHint = result.name;
+				}
+			});
+			console.log('countryHint:', countryHint);
+			console.log('countriesResults', countriesResults);
+
+			setHint(countryHint);
+		} else {
+			setHint(allHints[randomIndex]);
+		}
+
 		console.log('bankOfWords:', bankOfWords[randomIndex]);
 		console.log('hint:', allHints[randomIndex]);
 		console.log('All Hints:', allHints);
 	};
 
 	const handleNewGame = () => {
-		setAllHints([]);
 		getWordToGuess();
 		setGuessedCharacters([]);
 		setNumberOfLivesLeft(7);
 		setShowHint(false);
 		if (categoryChosen === 'TV Shows') {
 			getTvShowNames('tv');
+			setAllHints([]);
 		} else if (categoryChosen === 'Movies') {
 			getTvShowNames('movie');
+			setAllHints([]);
 		} else if (categoryChosen === 'Movie Stars') {
 			getMovieStars();
+			setAllHints([]);
 		} else if (categoryChosen === 'Pokemon') {
 			getPokemon();
+			setAllHints([]);
 		}
 	};
 
@@ -132,7 +151,11 @@ const GameBoard = ({
 		if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
 			return <p>Genres: {hint.join(', ')}</p>;
 		} else if (categoryChosen === 'Country Names') {
-			return <p>Region: {hint}</p>;
+			if (hint === 'Island') {
+				return <p>This is an Island</p>;
+			} else {
+				return <p>Neighbouring Country: {hint}</p>;
+			}
 		} else if (categoryChosen === 'Capital Names') {
 			return <p>Capital of: {hint}</p>;
 		} else if (categoryChosen === 'Movie Stars') {
@@ -163,7 +186,13 @@ const GameBoard = ({
 					<button className="game-button" onClick={() => handleNewGame()}>
 						New Game
 					</button>
-					<button className="game-button" onClick={() => setBankOfWords([])}>
+					<button
+						className="game-button"
+						onClick={() => {
+							setBankOfWords([]);
+							setAllHints([]);
+						}}
+					>
 						Select another Category
 					</button>
 				</div>
@@ -176,7 +205,13 @@ const GameBoard = ({
 					<button className="game-button" onClick={() => handleNewGame()}>
 						New Game
 					</button>
-					<button className="game-button" onClick={() => setBankOfWords([])}>
+					<button
+						className="game-button"
+						onClick={() => {
+							setBankOfWords([]);
+							setAllHints([]);
+						}}
+					>
 						Select another Category
 					</button>
 				</div>

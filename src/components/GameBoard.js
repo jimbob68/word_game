@@ -12,7 +12,8 @@ const GameBoard = ({
 	getPokemon,
 	setAllHints,
 	countriesResults,
-	getFootballTeams
+	getFootballTeams,
+	getDogBreeds
 }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
@@ -131,6 +132,9 @@ const GameBoard = ({
 		} else if (categoryChosen === 'Football Teams') {
 			getFootballTeams();
 			setAllHints([]);
+		} else if (categoryChosen === 'Dog Breeds') {
+			getDogBreeds();
+			setAllHints([]);
 		}
 	};
 
@@ -170,6 +174,8 @@ const GameBoard = ({
 			return <p>Plays in: {hint}</p>;
 		} else if (categoryChosen === 'Songs') {
 			return <p>Artist: {hint}</p>;
+		} else if (categoryChosen === 'Dog Breeds') {
+			return <img className="pokemon-image" src={hint} alt="Dog Breed" />;
 		}
 	};
 

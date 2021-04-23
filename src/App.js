@@ -179,6 +179,35 @@ function App() {
 			.catch((err) => console.error(err));
 	};
 
+	const getDogBreeds = () => {
+		let dogBreeds = [];
+		fetch('https://dog.ceo/api/breeds/list/all')
+			.then((res) => res.json())
+			.then((results) => {
+				for (const [ key, value ] of Object.entries(results.message)) {
+					if (value.length > 0) {
+						value.forEach((subBreed) => dogBreeds.push(subBreed + ' ' + key));
+					} else {
+						dogBreeds.push(key);
+					}
+				}
+				const randomIndex = Math.floor(Math.random() * dogBreeds.length);
+				let breedAsArray = dogBreeds[randomIndex].split(' ');
+				let dogBreedForFetch = '';
+				if (breedAsArray.length === 2) {
+					dogBreedForFetch = breedAsArray[1] + '/' + breedAsArray[0];
+				} else {
+					dogBreedForFetch = breedAsArray;
+				}
+				fetch('https://dog.ceo/api/breed/' + dogBreedForFetch + '/images/random')
+					.then((res) => res.json())
+					.then((results) => setAllHints([ results.message ]));
+				setBankOfWords([ dogBreeds[randomIndex] ]);
+				setCategoryChosen('Dog Breeds');
+			})
+			.catch((err) => console.error(err));
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
@@ -190,6 +219,7 @@ function App() {
 					getPokemon={getPokemon}
 					getFootballTeams={getFootballTeams}
 					getSongs={getSongs}
+					getDogBreeds={getDogBreeds}
 				/>
 			)}
 			{/* {bankOfWords.length > 0 &&
@@ -220,6 +250,7 @@ function App() {
 					setAllHints={setAllHints}
 					countriesResults={countriesResults}
 					getFootballTeams={getFootballTeams}
+					getDogBreeds={getDogBreeds}
 				/>
 			)}
 		</div>

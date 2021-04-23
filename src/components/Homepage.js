@@ -1,7 +1,15 @@
 import React from 'react';
 import './Homepage.css';
 
-const Homepage = ({ getCountryInfo, getTvShowNames, getMovieStars, getPokemon, getFootballTeams, getSongs }) => {
+const Homepage = ({
+	getCountryInfo,
+	getTvShowNames,
+	getMovieStars,
+	getPokemon,
+	getFootballTeams,
+	getSongs,
+	getDogBreeds
+}) => {
 	return (
 		<div className="home-container">
 			<p className="home-intro-text">Choose a Category</p>
@@ -34,6 +42,10 @@ const Homepage = ({ getCountryInfo, getTvShowNames, getMovieStars, getPokemon, g
 
 				<button className="home-button" onClick={() => getSongs()}>
 					Songs
+				</button>
+
+				<button className="home-button" onClick={() => getDogBreeds()}>
+					Dog Breeds
 				</button>
 			</div>
 		</div>

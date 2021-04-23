@@ -168,6 +168,8 @@ const GameBoard = ({
 			return <img className="pokemon-image" src={hint} alt="Pokemon" />;
 		} else if (categoryChosen === 'Football Teams') {
 			return <p>Plays in: {hint}</p>;
+		} else if (categoryChosen === 'Songs') {
+			return <p>Artist: {hint}</p>;
 		}
 	};
 

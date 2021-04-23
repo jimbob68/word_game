@@ -161,6 +161,24 @@ function App() {
 			.catch((err) => console.error(err));
 	};
 
+	const getSongs = () => {
+		let songNames = [];
+		let songHints = [];
+		// fetch('https://rss.itunes.apple.com/api/v1/gb/apple-music/top-songs/all/20/non-explicit.json')
+		fetch('https://itunes.apple.com/gb/rss/topsongs/limit=100/json')
+			.then((res) => res.json())
+			.then((data) => {
+				data.feed.entry.forEach((song) => {
+					songNames.push(song['im:name'].label);
+					songHints.push(song['im:artist'].label);
+				});
+				setBankOfWords(songNames);
+				setAllHints(songHints);
+				setCategoryChosen('Songs');
+			})
+			.catch((err) => console.error(err));
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
@@ -171,6 +189,7 @@ function App() {
 					getMovieStars={getMovieStars}
 					getPokemon={getPokemon}
 					getFootballTeams={getFootballTeams}
+					getSongs={getSongs}
 				/>
 			)}
 			{/* {bankOfWords.length > 0 &&

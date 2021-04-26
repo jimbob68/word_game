@@ -208,6 +208,24 @@ function App() {
 			.catch((err) => console.error(err));
 	};
 
+	const getStarWarsCharacters = () => {
+		let starWarsCharacterNames = []
+		const randomIndex = Math.floor(Math.random() * 8) + 1;
+		fetch("http://swapi.dev/api/people/?page=" + randomIndex)
+		.then(( res ) => res.json())
+		.then(( data ) => {
+			data.results.forEach(( character ) => {
+				starWarsCharacterNames.push( character.name )
+			})
+				setBankOfWords(starWarsCharacterNames);
+				// setAllHints();
+				// setCategoryChosen('StarWars Characters');
+				console.log(starWarsCharacterNames)
+				console.log(randomIndex)
+		})
+		.catch((err) => console.error(err));
+	};
+
 	return (
 		<div className="App">
 			<h1>Word Game</h1>
@@ -220,6 +238,7 @@ function App() {
 					getFootballTeams={getFootballTeams}
 					getSongs={getSongs}
 					getDogBreeds={getDogBreeds}
+					getStarWarsCharacters={getStarWarsCharacters}
 				/>
 			)}
 			{/* {bankOfWords.length > 0 &&

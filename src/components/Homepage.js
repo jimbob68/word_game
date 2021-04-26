@@ -8,7 +8,8 @@ const Homepage = ({
 	getPokemon,
 	getFootballTeams,
 	getSongs,
-	getDogBreeds
+	getDogBreeds,
+	getStarWarsCharacters
 }) => {
 	return (
 		<div className="home-container">
@@ -46,6 +47,10 @@ const Homepage = ({
 
 				<button className="home-button" onClick={() => getDogBreeds()}>
 					Dog Breeds
+				</button>
+
+				<button className="home-button" onClick={() => getStarWarsCharacters()}>
+					StarWars Characters
 				</button>
 			</div>
 		</div>

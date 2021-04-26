@@ -13,7 +13,8 @@ const GameBoard = ({
 	setAllHints,
 	countriesResults,
 	getFootballTeams,
-	getDogBreeds
+	getDogBreeds,
+	getStarWarsCharacters
 }) => {
 	const [ wordToGuess, setWordToGuess ] = useState('');
 	const [ guessedCharacters, setGuessedCharacters ] = useState([]);
@@ -135,6 +136,10 @@ const GameBoard = ({
 		} else if (categoryChosen === 'Dog Breeds') {
 			getDogBreeds();
 			setAllHints([]);
+		} 
+		else if (categoryChosen === 'StarWars Characters') {
+			getStarWarsCharacters();
+			setAllHints([]);
 		}
 	};
 
@@ -176,6 +181,8 @@ const GameBoard = ({
 			return <p>Artist: {hint}</p>;
 		} else if (categoryChosen === 'Dog Breeds') {
 			return <img className="pokemon-image" src={hint} alt="Dog Breed" />;
+		} else if (categoryChosen === 'StarWars Characters') {
+			return <p>{hint}</p>
 		}
 	};
 

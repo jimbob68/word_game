@@ -209,8 +209,8 @@ function App() {
 	};
 
 	const getStarWarsCharacters = () => {
-		let starWarsCharacterNames = []
-		let starWarsHints = []
+		const starWarsCharacterNames = []
+		const starWarsHints = []
 		const pageNumber = Math.floor(Math.random() * 8) + 1;
 		fetch("http://swapi.dev/api/people/?page=" + pageNumber)
 		.then(( res ) => res.json())
@@ -219,11 +219,23 @@ function App() {
 				starWarsCharacterNames.push( character.name )
 				starWarsHints.push( character.homeworld )
 			})
-				setBankOfWords(starWarsCharacterNames);
-				setAllHints( starWarsHints );
+			console.log("names", starWarsCharacterNames)
+			let planetURL = ""
+			const randomIndex = Math.floor(Math.random() * starWarsCharacterNames.length);
+			planetURL = starWarsHints[randomIndex]
+			fetch(planetURL)
+			.then(( res ) => res.json() )
+			.then(( results ) => {
+				let planetName = ""
+				planetName = results.name
+				setAllHints( [planetName] )
+			})
+				
+				setBankOfWords([starWarsCharacterNames[randomIndex]]);
+				// setAllHints( starWarsHints );
 				setCategoryChosen('StarWars Characters');
-				// console.log("names", starWarsCharacterNames)
-				// console.log("bankOfWords", bankOfWords)
+				
+				
 				// console.log("page", pageNumber)
 		})
 		.catch((err) => console.error(err));

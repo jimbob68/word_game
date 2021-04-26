@@ -170,19 +170,19 @@ const GameBoard = ({
 				return <p>Neighbouring Country: {hint}</p>;
 			}
 		} else if (categoryChosen === 'Capital Names') {
-			return <p>Capital of: {hint}</p>;
+			return <p>Capital of {hint}</p>;
 		} else if (categoryChosen === 'Movie Stars') {
-			return <p>Starred in: {hint}</p>;
+			return <p>Starred in {hint}</p>;
 		} else if (categoryChosen === 'Pokemon') {
 			return <img className="pokemon-image" src={hint} alt="Pokemon" />;
 		} else if (categoryChosen === 'Football Teams') {
-			return <p>Plays in: {hint}</p>;
+			return <p>This team plays in {hint}</p>;
 		} else if (categoryChosen === 'Songs') {
 			return <p>Artist: {hint}</p>;
 		} else if (categoryChosen === 'Dog Breeds') {
 			return <img className="pokemon-image" src={hint} alt="Dog Breed" />;
 		} else if (categoryChosen === 'StarWars Characters') {
-			return <p>{hint}</p>
+			return <p>Homeworld planet is {hint}</p>
 		}
 	};
 

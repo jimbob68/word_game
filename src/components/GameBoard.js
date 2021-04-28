@@ -188,6 +188,7 @@ const GameBoard = ({
 
 	return (
 		<div>
+			<p>Game Mode: {categoryChosen}</p>
 			<p className="lives-left-text">Lives Left: {numberOfLivesLeft}</p>
 			<img
 				className="hangman-image"

@@ -8,7 +8,12 @@
 .game-button {
 	width: auto;
 	padding: 5px 10px;
-	/* margin: 0 5px; */
+	margin: 0 5px;
+}
+
+.modal-close-button {
+	width: auto;
+	padding: 5px 10px;
 	margin-bottom: 10px;
 }
 
@@ -23,7 +28,7 @@
 	overflow-wrap: break-word;
 }
 
-.pokemon-image {
+.hint-image {
 	width: 100%;
 }
 

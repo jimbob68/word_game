@@ -170,7 +170,7 @@ const GameBoard = ({
 				} else {
 					return <p>Neighbouring Country: {hint}</p>;
 				}
-			} else if (categoryChosen === 'Capital Names') {
+			} else if (categoryChosen === 'Capital Cities') {
 				return <p>Capital of {hint}</p>;
 			} else if (categoryChosen === 'Movie Stars') {
 				return <p>Starred in {hint}</p>;
@@ -249,10 +249,10 @@ const GameBoard = ({
 				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
 			)}
 			<Modal className="modal-window" appElement={document.getElementById('root')} isOpen={modalIsOpen}>
-				<button className="game-button" onClick={() => setModalIsOpen(false)}>
+				<button className="modal-close-button" onClick={() => setModalIsOpen(false)}>
 					Close
 				</button>
-				<img className="pokemon-image" src={hint} alt="Pokemon" />
+				<img className="hint-image" src={hint} alt="hint" />
 			</Modal>
 		</div>
 	);

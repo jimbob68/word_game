@@ -37,7 +37,7 @@ function App() {
 		if (type === 'name') {
 			setCategoryChosen('Country Names');
 		} else {
-			setCategoryChosen('Capital Names');
+			setCategoryChosen('Capital Cities');
 		}
 		// setAllHints(countryHints);
 	};

@@ -249,10 +249,10 @@ const GameBoard = ({
 				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
 			)}
 			<Modal className="modal-window" appElement={document.getElementById('root')} isOpen={modalIsOpen}>
-				<img className="pokemon-image" src={hint} alt="Pokemon" />
 				<button className="game-button" onClick={() => setModalIsOpen(false)}>
 					Close
 				</button>
+				<img className="pokemon-image" src={hint} alt="Pokemon" />
 			</Modal>
 		</div>
 	);

@@ -209,43 +209,38 @@ function App() {
 	};
 
 	const getStarWarsCharacters = () => {
-		const starWarsCharacterNames = []
-		const starWarsHints = []
+		const starWarsCharacterNames = [];
+		const starWarsHints = [];
 		const pageNumber = Math.floor(Math.random() * 8) + 1;
-		fetch("http://swapi.dev/api/people/?page=" + pageNumber)
-		.then(( res ) => res.json())
-		.then(( data ) => {
-			data.results.forEach(( character ) => {
-				starWarsCharacterNames.push( character.name )
-				starWarsHints.push( character.homeworld )
-			})
-			console.log("names", starWarsCharacterNames)
-			let planetURL = ""
-			const randomIndex = Math.floor(Math.random() * starWarsCharacterNames.length);
-			planetURL = starWarsHints[randomIndex]
-			fetch(planetURL)
-			.then(( res ) => res.json() )
-			.then(( results ) => {
-				let planetName = ""
-				planetName = results.name
-				setAllHints( [planetName] )
-			})
-				
-				setBankOfWords([starWarsCharacterNames[randomIndex]]);
+		fetch('http://swapi.dev/api/people/?page=' + pageNumber)
+			.then((res) => res.json())
+			.then((data) => {
+				data.results.forEach((character) => {
+					starWarsCharacterNames.push(character.name);
+					starWarsHints.push(character.homeworld);
+				});
+				console.log('names', starWarsCharacterNames);
+				let planetURL = '';
+				const randomIndex = Math.floor(Math.random() * starWarsCharacterNames.length);
+				planetURL = starWarsHints[randomIndex];
+				fetch(planetURL).then((res) => res.json()).then((results) => {
+					let planetName = '';
+					planetName = results.name;
+					setAllHints([ planetName ]);
+				});
+
+				setBankOfWords([ starWarsCharacterNames[randomIndex] ]);
 				// setAllHints( starWarsHints );
 				setCategoryChosen('StarWars Characters');
-				
-				
-				// console.log("page", pageNumber)
-		})
-		.catch((err) => console.error(err));
-	};
 
-	
+				// console.log("page", pageNumber)
+			})
+			.catch((err) => console.error(err));
+	};
 
 	return (
 		<div className="App">
-			<h1>Word Game</h1>
+			<h1>Hangman</h1>
 			{bankOfWords.length === 0 && (
 				<Homepage
 					getTvShowNames={getTvShowNames}

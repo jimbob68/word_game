@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import Keyboard from './Keyboard.js';
+import Modal from 'react-modal';
 
 const GameBoard = ({
 	bankOfWords,
@@ -22,6 +23,7 @@ const GameBoard = ({
 	const [ numberOfLivesLeft, setNumberOfLivesLeft ] = useState(7);
 	const [ hint, setHint ] = useState([]);
 	const [ showHint, setShowHint ] = useState(false);
+	const [ modalIsOpen, setModalIsOpen ] = useState(false);
 
 	useEffect(
 		() => {
@@ -136,8 +138,7 @@ const GameBoard = ({
 		} else if (categoryChosen === 'Dog Breeds') {
 			getDogBreeds();
 			setAllHints([]);
-		} 
-		else if (categoryChosen === 'StarWars Characters') {
+		} else if (categoryChosen === 'StarWars Characters') {
 			getStarWarsCharacters();
 			setAllHints([]);
 		}
@@ -160,29 +161,34 @@ const GameBoard = ({
 					Hint
 				</button>
 			);
-		}
-		if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
-			return <p>Genres: {hint.join(', ')}</p>;
-		} else if (categoryChosen === 'Country Names') {
-			if (hint === 'Island') {
-				return <p>This is an Island</p>;
-			} else {
-				return <p>Neighbouring Country: {hint}</p>;
+		} else {
+			if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
+				return <p>Genres: {hint.join(', ')}</p>;
+			} else if (categoryChosen === 'Country Names') {
+				if (hint === 'Island') {
+					return <p>This is an Island</p>;
+				} else {
+					return <p>Neighbouring Country: {hint}</p>;
+				}
+			} else if (categoryChosen === 'Capital Names') {
+				return <p>Capital of {hint}</p>;
+			} else if (categoryChosen === 'Movie Stars') {
+				return <p>Starred in {hint}</p>;
+			} else if (categoryChosen === 'Pokemon') {
+				setModalIsOpen(true);
+				setShowHint(false);
+				// return <img className="pokemon-image" src={hint} alt="Pokemon" />;
+			} else if (categoryChosen === 'Football Teams') {
+				return <p>This team plays in {hint}</p>;
+			} else if (categoryChosen === 'Songs') {
+				return <p>Artist: {hint}</p>;
+			} else if (categoryChosen === 'Dog Breeds') {
+				setModalIsOpen(true);
+				setShowHint(false);
+				// return <img className="pokemon-image" src={hint} alt="Dog Breed" />;
+			} else if (categoryChosen === 'StarWars Characters') {
+				return <p>Homeworld planet is {hint}</p>;
 			}
-		} else if (categoryChosen === 'Capital Names') {
-			return <p>Capital of {hint}</p>;
-		} else if (categoryChosen === 'Movie Stars') {
-			return <p>Starred in {hint}</p>;
-		} else if (categoryChosen === 'Pokemon') {
-			return <img className="pokemon-image" src={hint} alt="Pokemon" />;
-		} else if (categoryChosen === 'Football Teams') {
-			return <p>This team plays in {hint}</p>;
-		} else if (categoryChosen === 'Songs') {
-			return <p>Artist: {hint}</p>;
-		} else if (categoryChosen === 'Dog Breeds') {
-			return <img className="pokemon-image" src={hint} alt="Dog Breed" />;
-		} else if (categoryChosen === 'StarWars Characters') {
-			return <p>Homeworld planet is {hint}</p>
 		}
 	};
 
@@ -242,6 +248,12 @@ const GameBoard = ({
 			numberOfLivesLeft > 0 && (
 				<Keyboard guessedCharacters={guessedCharacters} setGuessedCharacters={setGuessedCharacters} />
 			)}
+			<Modal className="modal-window" appElement={document.getElementById('root')} isOpen={modalIsOpen}>
+				<img className="pokemon-image" src={hint} alt="Pokemon" />
+				<button className="game-button" onClick={() => setModalIsOpen(false)}>
+					Close
+				</button>
+			</Modal>
 		</div>
 	);
 };

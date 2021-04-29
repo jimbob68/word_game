@@ -23,12 +23,31 @@
 }
 
 .pokemon-image {
-	width: 100px;
+	width: 100%;
 }
 
 /* .x {
 	width: 85%;
 } */
+
+.modal-window {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+	max-width: 350px;
+	padding: 20px;
+	background-color: rgb(253, 247, 192);
+	/* width: 90%; */
+}
+
+@media screen and (max-width: 600px) {
+	.modal-window {
+		height: auto;
+		padding: 20px;
+		background-color: rgb(253, 247, 192);
+		/* width: 90%; */
+	}
+}
 
 @media screen and (max-height: 670px) {
 	.hangman-image {

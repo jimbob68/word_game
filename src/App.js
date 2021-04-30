@@ -212,7 +212,7 @@ function App() {
 		const starWarsCharacterNames = [];
 		const starWarsHints = [];
 		const pageNumber = Math.floor(Math.random() * 8) + 1;
-		fetch('http://swapi.dev/api/people/?page=' + pageNumber)
+		fetch('https://swapi.dev/api/people/?page=' + pageNumber)
 			.then((res) => res.json())
 			.then((data) => {
 				data.results.forEach((character) => {

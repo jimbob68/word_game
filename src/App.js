@@ -225,7 +225,6 @@ function App() {
 				const randomIndex = Math.floor(Math.random() * starWarsCharacterNames.length);
 				planetURL = starWarsHints[randomIndex];
 				planetURL = [ planetURL.slice(0, 4), 's', planetURL.slice(4) ].join('');
-				console.log('planetURL:', planetURL);
 				fetch(planetURL).then((res) => res.json()).then((results) => {
 					let planetName = '';
 					planetName = results.name;

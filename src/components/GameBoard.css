@@ -45,6 +45,10 @@
 	background-color: rgb(253, 247, 192);
 	/* width: 90%; */
 }
+.red-text {
+	color: red;
+	font-weight: bold;
+}
 
 @media screen and (max-width: 600px) {
 	.modal-window {

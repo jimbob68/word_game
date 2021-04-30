@@ -195,7 +195,9 @@ const GameBoard = ({
 	return (
 		<div>
 			<p>Game Mode: {categoryChosen}</p>
-			<p className="lives-left-text">Lives Left: {numberOfLivesLeft}</p>
+			<p className={numberOfLivesLeft <= 3 ? 'lives-left-text red-text' : 'lives-left-text'}>
+				Lives Left: {numberOfLivesLeft}
+			</p>
 			<img
 				className="hangman-image"
 				src={require('../images/' + numberOfLivesLeft + '.png').default}

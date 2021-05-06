@@ -1,4 +1,4 @@
-https://main.dcr5s95bldpus.amplifyapp.com/
+Play our <a href="https://main.dcr5s95bldpus.amplifyapp.com/">Hangman</a> game.
 
 # Getting Started with Create React App
 

@@ -21,10 +21,10 @@ You will also see any lint errors in the console.
 
 <img src="https://user-images.githubusercontent.com/56137428/117280420-7c433100-ae5a-11eb-8bdc-a5660b364038.png" width="300">
 
+<img src="https://user-images.githubusercontent.com/56137428/117280750-d217d900-ae5a-11eb-8fe6-eeac04f38965.png" width="300">
 
 
 
-![image](https://user-images.githubusercontent.com/56137428/117280750-d217d900-ae5a-11eb-8fe6-eeac04f38965.png)
 
 ![image](https://user-images.githubusercontent.com/56137428/117281438-8d407200-ae5b-11eb-91a4-92e17d1738a2.png)
 

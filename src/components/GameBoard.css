@@ -50,6 +50,14 @@
 	font-weight: bold;
 }
 
+.flag-image {
+	height: 50px;
+}
+
+.flag-text {
+	font-size: 8px;
+}
+
 @media screen and (max-width: 600px) {
 	.modal-window {
 		height: auto;

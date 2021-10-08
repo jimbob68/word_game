@@ -12,23 +12,35 @@ function App() {
 
 	const getCountryInfo = (type) => {
 		const countryHints = [];
-		fetch('https://restcountries.eu/rest/v2/all')
+		fetch('https://restcountries.com/v3.1/all')
 			.then((res) => res.json())
 			.then((results) => {
 				const countryNamesArray = [];
+				console.log("results:", results)
 				results.forEach((result) => {
-					countryNamesArray.push(result[type]);
+					
 					if (type === 'capital') {
-						countryHints.push(result.name);
+						
+						// console.log("Country hints:", countryHints)
+						if(result.capital){
+							countryHints.push(result.name.common);
+							countryNamesArray.push(result.capital[0])
+						} else {
+							console.log("result.name.common:", result.name.common)
+						}
 					} else {
-						// if (result.borders[0]) {
-						countryHints.push(result.borders[0]);
-						// } else {
-						// 	countryHints.push('Island');
-						// }
+						if (result.flag) {
+						countryHints.push(result.flags.svg)
+						countryNamesArray.push(result.name.common)
+
+						} else {
+							// countryHints.push('Island');
+							console.log("result.name.common:", result.name.common)
+						}
 					}
 				});
 				setBankOfWords(countryNamesArray);
+				console.log("country names:", countryNamesArray)
 				setCountriesResults(results);
 				return results;
 			})

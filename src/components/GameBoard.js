@@ -94,21 +94,21 @@ const GameBoard = ({
 	const getWordToGuess = () => {
 		const randomIndex = Math.floor(Math.random() * bankOfWords.length);
 		setWordToGuess(bankOfWords[randomIndex]);
-		if (categoryChosen === 'Country Names') {
-			let countryHint = 'Island';
-			countriesResults.forEach((result) => {
-				console.log('result.Alpha3:', result.alpha3Code);
-				if (result.alpha3Code === allHints[randomIndex]) {
-					countryHint = result.name;
-				}
-			});
-			console.log('countryHint:', countryHint);
-			console.log('countriesResults', countriesResults);
+		// if (categoryChosen === 'Country Names') {
+		// 	let countryHint = 'Island';
+		// 	countriesResults.forEach((result) => {
+		// 		console.log('result.Alpha3:', result.alpha3Code);
+		// 		if (result.alpha3Code === allHints[randomIndex]) {
+		// 			countryHint = result.name;
+		// 		}
+		// 	});
+		// 	console.log('countryHint:', countryHint);
+		// 	console.log('countriesResults', countriesResults);
 
-			setHint(countryHint);
-		} else {
+		// 	setHint(countryHint);
+		// } else {
 			setHint(allHints[randomIndex]);
-		}
+		// }
 
 		console.log('bankOfWords:', bankOfWords[randomIndex]);
 		console.log('hint:', allHints[randomIndex]);
@@ -165,11 +165,15 @@ const GameBoard = ({
 			if (categoryChosen === 'TV Shows' || categoryChosen === 'Movies') {
 				return <p>Genres: {hint.join(', ')}</p>;
 			} else if (categoryChosen === 'Country Names') {
-				if (hint === 'Island') {
-					return <p>This is an Island</p>;
-				} else {
-					return <p>Neighbouring Country: {hint}</p>;
-				}
+				return <div>
+					<img src={hint} onClick={() => setModalIsOpen(true)} className="flag-image" alt="flag"/>
+					<p className="flag-text">click to enlarge</p>
+				</div>
+				// if (hint === 'Island') {
+				// 	return <p>This is an Island</p>;
+				// } else {
+				// 	return <p>Neighbouring Country: {hint}</p>;
+				// }
 			} else if (categoryChosen === 'Capital Cities') {
 				return <p>Capital of {hint}</p>;
 			} else if (categoryChosen === 'Movie Stars') {
